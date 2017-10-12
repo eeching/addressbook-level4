@@ -48,5 +48,4 @@ public class Gender {
         return value.hashCode();
     }
 
-
 }

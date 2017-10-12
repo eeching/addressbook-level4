@@ -41,5 +41,4 @@ public class GenderCommandParser implements Parser<GenderCommand> {
         }
     }
 
-
 }
