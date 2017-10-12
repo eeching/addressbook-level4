@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -22,18 +23,37 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Phone> phone;
     private ObjectProperty<Email> email;
     private ObjectProperty<Address> address;
+    private ObjectProperty<Gender> gender;
 
     private ObjectProperty<UniqueTagList> tags;
 
+
+
     /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+     +     * Every field must be present and not null except birthday.
+     +     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) throws IllegalValueException {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
+        this.gender = new SimpleObjectProperty<>(new Gender());
+        // protect internal tags from changes in the arg list
+        this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = new SimpleObjectProperty<>(name);
+        this.phone = new SimpleObjectProperty<>(phone);
+        this.email = new SimpleObjectProperty<>(email);
+        this.address = new SimpleObjectProperty<>(address);
+        this.gender = new SimpleObjectProperty<>(gender);
+
         // protect internal tags from changes in the arg list
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
     }
@@ -42,7 +62,7 @@ public class Person implements ReadOnlyPerson {
      * Creates a copy of the given ReadOnlyPerson.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(),
+        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getGender(),
                 source.getTags());
     }
 
@@ -101,6 +121,21 @@ public class Person implements ReadOnlyPerson {
     public Address getAddress() {
         return address.get();
     }
+
+    public void setGender(Gender gender) {
+        this.gender.set(requireNonNull(gender));
+    }
+
+    @Override
+    public ObjectProperty<Gender> genderProperty() {
+        return gender;
+    }
+
+    @Override
+    public Gender getGender() {
+        return gender.get();
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

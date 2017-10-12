@@ -5,6 +5,7 @@ import java.util.Set;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -101,6 +102,18 @@ public class PersonBuilder {
             this.person.setEmail(new Email(email));
         } catch (IllegalValueException ive) {
             throw new IllegalArgumentException("email is expected to be unique.");
+        }
+        return this;
+    }
+
+    /**
+     +     * Sets the {@code Birthday} of the {@code Person} that we are building.
+     +     */
+    public PersonBuilder withGender(String gender) {
+        try {
+            this.person.setGender(new Gender(gender));
+        } catch (IllegalValueException ive) {
+            throw new IllegalArgumentException("gender is either male or female");
         }
         return this;
     }
