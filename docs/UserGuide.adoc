@@ -37,6 +37,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
+
 .  Refer to the link:#features[Features] section below for details of each command.
 
 == Features
@@ -91,6 +92,20 @@ Examples:
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+=== add gender by index: `gender`
+
+Specify a person's gender by the index in the addressbook
+Format: `gender INDEX [g/GENDER]`
+
+****
+* Specify the person's gender at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
+* Gender can only be male or female
+****
+
+Example:
+*`gender 1 g/male` +
+Specify the gender of the first person in the list to be a male
 
 === Locating persons by name: `find`
 
