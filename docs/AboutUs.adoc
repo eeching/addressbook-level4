@@ -28,29 +28,20 @@ Responsibilities: Model
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Ng Zu Yao
+image::ngzuyao.png[width="150", align="left"]
+{empty}[https://github.com/ngzuyao[github]]
 
-Role: Developer +
-Responsibilities: Data
-
-'''
-
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: Dev Ops + Threading
+Role: Developer
+Responsibilities: Ui
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Lu Lechuan
+image::lulechuan.jpg[width="150", align="left"]
+{empty}[https://github.com/lulechuan[github]]
 
-Role: Developer +
-Responsibilities: UI
+Role: Developer
+Responsibilities: Logic
 
 '''
