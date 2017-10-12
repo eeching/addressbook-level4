@@ -122,7 +122,9 @@ public class Person implements ReadOnlyPerson {
         return address.get();
     }
 
-    public void setGender(Gender gender) { this.gender.set(requireNonNull(gender)); }
+    public void setGender(Gender gender) {
+        this.gender.set(requireNonNull(gender));
+    }
 
     @Override
     public ObjectProperty<Gender> genderProperty() {
