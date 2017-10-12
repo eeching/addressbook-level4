@@ -85,4 +85,5 @@ public class GenderCommand extends UndoableCommand {
 
         return new CommandResult(String.format(MESSAGE_UPDATE_PERSON_GENDER_SUCCESS, personUpdated));
     }
+
 }
