@@ -20,11 +20,11 @@ public class Gender {
      * @throws IllegalValueException if given address string is invalid.
      */
 
-    public Gender() throws IllegalValueException{
-     this.value = "";
+    public Gender() throws IllegalValueException {
+        this.value = "";
     }
     public Gender(String gender) throws IllegalValueException {
-        if(!(gender.equals("male")||gender.equals("female")||gender.equals(""))) {
+        if (!(gender.equals("male") || gender.equals("female") || gender.equals(""))) {
             throw new IllegalValueException(MESSAGE_GENDER_CONSTRAINTS);
         }
         this.value = gender;

@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.beans.property.ObjectProperty;
-import seedu.address.commons.exceptions.IllegalValueException;
 import javafx.beans.property.SimpleObjectProperty;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -33,15 +33,15 @@ public class Person implements ReadOnlyPerson {
      +     * Every field must be present and not null except birthday.
      +     */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) throws IllegalValueException {
-               requireAllNonNull(name, phone, email, address, tags);
-               this.name = new SimpleObjectProperty<>(name);
-               this.phone = new SimpleObjectProperty<>(phone);
-                this.email = new SimpleObjectProperty<>(email);
-                this.address = new SimpleObjectProperty<>(address);
-                this.gender = new SimpleObjectProperty<>(new Gender());
-                // protect internal tags from changes in the arg list
-                this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
-            }
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = new SimpleObjectProperty<>(name);
+        this.phone = new SimpleObjectProperty<>(phone);
+        this.email = new SimpleObjectProperty<>(email);
+        this.address = new SimpleObjectProperty<>(address);
+        this.gender = new SimpleObjectProperty<>(new Gender());
+        // protect internal tags from changes in the arg list
+        this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
+    }
 
     /**
      * Every field must be present and not null.
@@ -122,7 +122,7 @@ public class Person implements ReadOnlyPerson {
         return address.get();
     }
 
-    public void setGender(Gender gender){ this.gender.set(requireNonNull(gender));}
+    public void setGender(Gender gender) { this.gender.set(requireNonNull(gender)); }
 
     @Override
     public ObjectProperty<Gender> genderProperty() {

@@ -78,11 +78,11 @@ public class EditCommand extends UndoableCommand {
 
         Person editedPerson = null;
 
-              try {
-                  editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-              } catch (IllegalValueException e) {
-                  e.printStackTrace();
-              }
+        try {
+            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
 
         try {
             model.updatePerson(personToEdit, editedPerson);

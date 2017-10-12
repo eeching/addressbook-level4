@@ -35,8 +35,8 @@ public interface ReadOnlyPerson {
                 && other.getPhone().equals(this.getPhone())
                 && other.getEmail().equals(this.getEmail())
                 && other.getAddress().equals(this.getAddress())
-                && (((other.getGender() == null)&&(this.getGender() == null))
-                ||other.getGender().equals(this.getGender())));
+                && (((other.getGender() == null) && (this.getGender() == null))
+                || other.getGender().equals(this.getGender())));
     }
 
     /**
@@ -51,12 +51,12 @@ public interface ReadOnlyPerson {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress());
-        if (getGender()!= null) {
-                builder.append(" Gender: ");
-                builder.append(getGender());
+        if (getGender() != null) {
+            builder.append(" Gender: ");
+            builder.append(getGender());
         }
 
-                builder.append(" Tags: ");
+        builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
