@@ -84,7 +84,8 @@ public class Person implements ReadOnlyPerson {
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, Gender gender, SecPhone secPhone, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender, SecPhone secPhone,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
