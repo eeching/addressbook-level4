@@ -43,7 +43,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
             try {
                 result = command.execute();
-            } catch(IllegalValueException e) {
+            } catch (IllegalValueException e) {
                 throw new AssertionError("wrong input value");
             }
 
