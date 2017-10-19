@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -70,6 +71,8 @@ public class TypicalPersons {
                 ab.addPerson(person);
             } catch (DuplicatePersonException e) {
                 assert false : "not possible";
+            } catch (IllegalValueException e) {
+                throw new AssertionError("wrong input");
             }
         }
         return ab;
