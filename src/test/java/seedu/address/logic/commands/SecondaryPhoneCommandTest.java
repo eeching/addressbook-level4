@@ -129,6 +129,4 @@ public class SecondaryPhoneCommandTest {
             return new AddressBook();
         }
     }
-    
-
 }
