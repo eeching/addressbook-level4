@@ -32,14 +32,18 @@ public class Person implements ReadOnlyPerson {
     /**
      +     * Every field must be present and not null except birthday.
      +     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) throws IllegalValueException {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
-        this.gender = new SimpleObjectProperty<>(new Gender());
-        this.secPhone = new SimpleObjectProperty<>(new SecPhone());
+        try {
+            this.gender = new SimpleObjectProperty<>(new Gender());
+            this.secPhone = new SimpleObjectProperty<>(new SecPhone());
+        } catch (IllegalValueException e) {
+            throw new AssertionError("invalid input");
+        }
         // protect internal tags from changes in the arg list
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
     }
@@ -47,35 +51,40 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Gender gender, Set<Tag> tags)
-            throws IllegalValueException {
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
         this.gender = new SimpleObjectProperty<>(gender);
-        this.secPhone = new SimpleObjectProperty<>(new SecPhone());
+        try {
+            this.secPhone = new SimpleObjectProperty<>(new SecPhone());
+        } catch (IllegalValueException e) {
+            throw new AssertionError("invalid input");
+        }
         // protect internal tags from changes in the arg list
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, SecPhone secPhone, Set<Tag> tags)
-            throws IllegalValueException {
+    public Person(Name name, Phone phone, Email email, Address address, SecPhone secPhone, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
-        this.gender = new SimpleObjectProperty<>(new Gender());
+        try {
+            this.gender = new SimpleObjectProperty<>(new Gender());
+        } catch (IllegalValueException e) {
+            throw new AssertionError("invalid input");
+        }
         this.secPhone = new SimpleObjectProperty<>(secPhone);
 
         // protect internal tags from changes in the arg list
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, Gender gender, SecPhone secPhone, Set<Tag> tags)
-            throws IllegalValueException {
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender, SecPhone secPhone, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
@@ -91,7 +100,7 @@ public class Person implements ReadOnlyPerson {
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
-    public Person(ReadOnlyPerson source)throws IllegalValueException {
+    public Person(ReadOnlyPerson source) {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getGender(),
                 source.getSecPhone(),
                 source.getTags());
