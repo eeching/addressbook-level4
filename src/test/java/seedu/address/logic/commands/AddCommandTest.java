@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,7 +33,7 @@ public class AddCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullPerson_throwsNullPointerException() throws IllegalValueException {
         thrown.expect(NullPointerException.class);
         new AddCommand(null);
     }
@@ -63,33 +64,42 @@ public class AddCommandTest {
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
 
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        try {
+            AddCommand addAliceCommand = new AddCommand(alice);
+            AddCommand addBobCommand = new AddCommand(bob);
 
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+            // same object -> returns true
+            assertTrue(addAliceCommand.equals(addAliceCommand));
 
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+            // same values -> returns true
+            AddCommand addAliceCommandCopy = new AddCommand(alice);
+            assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+            // different types -> returns false
+            assertFalse(addAliceCommand.equals(1));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+            // null -> returns false
+            assertFalse(addAliceCommand.equals(null));
+
+            // different person -> returns false
+            assertFalse(addAliceCommand.equals(addBobCommand));
+        } catch (IllegalValueException e) {
+            throw new AssertionError("invalid value");
+        }
     }
 
     /**
      * Generates a new AddCommand with the details of the given person.
      */
     private AddCommand getAddCommandForPerson(Person person, Model model) {
-        AddCommand command = new AddCommand(person);
-        command.setData(model, new CommandHistory(), new UndoRedoStack());
-        return command;
+        try {
+            AddCommand command = new AddCommand(person);
+            command.setData(model, new CommandHistory(), new UndoRedoStack());
+            return command;
+        } catch (IllegalValueException e) {
+            throw new AssertionError("invalid value");
+        }
     }
 
     /**
@@ -158,7 +168,11 @@ public class AddCommandTest {
 
         @Override
         public void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
-            personsAdded.add(new Person(person));
+            try {
+                personsAdded.add(new Person(person));
+            } catch (IllegalValueException e) {
+                throw new AssertionError("invalid input");
+            }
         }
 
         @Override

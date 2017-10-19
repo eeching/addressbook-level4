@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
@@ -80,6 +81,8 @@ public class TestApp extends MainApp {
             throw new AssertionError("Data is not in the AddressBook format.");
         } catch (IOException ioe) {
             throw new AssertionError("Storage file cannot be found.");
+        } catch (IllegalValueException e) {
+            throw new AssertionError("invalid value");
         }
     }
 
@@ -93,7 +96,8 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the model.
      */
-    public Model getModel() {
+    public Model getModel() throws IllegalValueException{
+
         Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
         ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         return copy;
