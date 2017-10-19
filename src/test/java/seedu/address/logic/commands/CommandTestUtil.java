@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -19,6 +20,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import sun.jvm.hotspot.utilities.AssertionFailure;
 
 /**
  * Contains helper methods for testing commands.
@@ -84,6 +86,8 @@ public class CommandTestUtil {
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
+        } catch (IllegalValueException e){
+            throw new AssertionError("invalid input");
         }
     }
 
@@ -96,7 +100,13 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+
+        AddressBook expectedAddressBook;
+        try {
+            expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        } catch (IllegalValueException e) {
+            throw new AssertionError("invalid input");
+        }
         List<ReadOnlyPerson> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         try {
@@ -106,6 +116,8 @@ public class CommandTestUtil {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedAddressBook, actualModel.getAddressBook());
             assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        } catch (IllegalValueException e) {
+            throw new AssertionError("invalid input");
         }
     }
 
@@ -129,6 +141,8 @@ public class CommandTestUtil {
             model.deletePerson(firstPerson);
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("Person in filtered list must exist in model.", pnfe);
+        } catch (IllegalValueException e) {
+            throw new AssertionError("invalid input");
         }
     }
 }

@@ -37,6 +37,7 @@ public class SecondaryPhoneCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+
     @Test
     public void execute_personAcceptedByModel_updateGenderSuccessful() throws Exception {
         Person updatedPerson = new PersonBuilder(model.getFilteredPersonList()
