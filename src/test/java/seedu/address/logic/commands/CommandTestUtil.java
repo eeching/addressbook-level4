@@ -20,7 +20,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import sun.jvm.hotspot.utilities.AssertionFailure;
+//import sun.jvm.hotspot.utilities.AssertionFailure;
 
 /**
  * Contains helper methods for testing commands.
