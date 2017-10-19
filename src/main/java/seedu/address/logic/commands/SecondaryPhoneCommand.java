@@ -55,7 +55,8 @@ public class SecondaryPhoneCommand extends UndoableCommand {
     /**
      * Adds or Updates a Person's secondary phone
      */
-    private Person updatePersonSecPhone(ReadOnlyPerson personToUpdateSecPhone, SecPhone update) throws IllegalValueException{
+    private Person updatePersonSecPhone(ReadOnlyPerson personToUpdateSecPhone, SecPhone update)
+            throws IllegalValueException {
         Name name = personToUpdateSecPhone.getName();
         Phone phone = personToUpdateSecPhone.getPhone();
         Email email = personToUpdateSecPhone.getEmail();
@@ -65,9 +66,9 @@ public class SecondaryPhoneCommand extends UndoableCommand {
         Set<Tag> tags = personToUpdateSecPhone.getTags();
 
         Person personUpdated;
-        if(command.equals("update")) {
+        if (command.equals("update")) {
             personUpdated = new Person(name, phone, email, address, gender, update, tags);
-        }else{
+        } else {
             personUpdated = new Person(name, phone, email, address, gender, new SecPhone(), tags);
         }
 

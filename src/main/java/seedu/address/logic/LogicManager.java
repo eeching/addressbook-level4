@@ -41,9 +41,9 @@ public class LogicManager extends ComponentManager implements Logic {
 
             CommandResult result;
 
-            try{
+            try {
                 result = command.execute();
-            }catch(IllegalValueException e){
+            } catch(IllegalValueException e) {
                 throw new AssertionError("wrong input value");
             }
 

@@ -47,7 +47,8 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Gender gender, Set<Tag> tags) throws IllegalValueException {
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender, Set<Tag> tags)
+            throws IllegalValueException {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
@@ -59,7 +60,8 @@ public class Person implements ReadOnlyPerson {
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, SecPhone secPhone, Set<Tag> tags) throws IllegalValueException {
+    public Person(Name name, Phone phone, Email email, Address address, SecPhone secPhone, Set<Tag> tags)
+            throws IllegalValueException {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
@@ -72,7 +74,8 @@ public class Person implements ReadOnlyPerson {
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, Gender gender, SecPhone secPhone, Set<Tag> tags) throws IllegalValueException {
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender, SecPhone secPhone, Set<Tag> tags)
+            throws IllegalValueException {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);

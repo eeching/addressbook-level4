@@ -45,14 +45,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) throws IllegalValueException{
+    public AddressBook(ReadOnlyAddressBook toBeCopied) throws IllegalValueException {
         this();
         resetData(toBeCopied);
     }
 
     //// list overwrite operations
 
-    public void setPersons(List<? extends ReadOnlyPerson> persons) throws DuplicatePersonException, IllegalValueException {
+    public void setPersons(List<? extends ReadOnlyPerson> persons)
+            throws DuplicatePersonException, IllegalValueException {
         this.persons.setPersons(persons);
     }
 

@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 import static java.util.Objects.requireNonNull;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Person's secPhone in the address book.
@@ -22,10 +22,10 @@ public class SecPhone {
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
-     public SecPhone(String phone) throws IllegalValueException {
-        if(phone.equals("")){
+    public SecPhone(String phone) throws IllegalValueException {
+        if (phone.equals("")) {
             this.value = "";
-        }else {
+        } else {
             requireNonNull(phone);
             String trimmedPhone = phone.trim();
             if (!isValidPhone(trimmedPhone)) {
@@ -35,7 +35,7 @@ public class SecPhone {
         }
     }
 
-    public SecPhone() throws IllegalValueException{
+    public SecPhone() throws IllegalValueException {
         this.value = "";
     }
 

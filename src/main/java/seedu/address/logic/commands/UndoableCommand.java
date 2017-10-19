@@ -22,7 +22,7 @@ public abstract class UndoableCommand extends Command {
     /**
      * Stores the current state of {@code model#addressBook}.
      */
-    private void saveAddressBookSnapshot() throws IllegalValueException{
+    private void saveAddressBookSnapshot() throws IllegalValueException {
         requireNonNull(model);
         this.previousAddressBook = new AddressBook(model.getAddressBook());
     }
@@ -32,7 +32,7 @@ public abstract class UndoableCommand extends Command {
      * was executed and updates the filtered person list to
      * show all persons.
      */
-    protected final void undo() throws IllegalValueException{
+    protected final void undo() throws IllegalValueException {
         requireAllNonNull(model, previousAddressBook);
         model.resetData(previousAddressBook);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -42,7 +42,7 @@ public abstract class UndoableCommand extends Command {
      * Executes the command and updates the filtered person
      * list to show all persons.
      */
-    protected final void redo() throws IllegalValueException{
+    protected final void redo() throws IllegalValueException {
         requireNonNull(model);
         try {
             executeUndoableCommand();

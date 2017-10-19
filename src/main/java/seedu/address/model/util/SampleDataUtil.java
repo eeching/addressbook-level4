@@ -45,7 +45,7 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook(){
+    public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
             AddressBook sampleAb = new AddressBook();
             for (Person samplePerson : getSamplePersons()) {
@@ -54,7 +54,7 @@ public class SampleDataUtil {
             return sampleAb;
         } catch (DuplicatePersonException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
-        } catch (IllegalValueException e){
+        } catch (IllegalValueException e) {
             throw new AssertionError("wrong input value", e);
         }
     }

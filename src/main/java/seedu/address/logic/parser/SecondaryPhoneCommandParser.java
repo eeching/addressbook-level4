@@ -26,7 +26,7 @@ public class SecondaryPhoneCommandParser implements Parser<SecondaryPhoneCommand
             StringTokenizer st = new StringTokenizer(args);
             Index index = ParserUtil.parseIndex(st.nextToken());
             String command = st.nextToken();
-            if(st.hasMoreTokens()) {
+            if (st.hasMoreTokens()) {
                 String phoneInput = st.nextToken();
                 String prefix = phoneInput.substring(0, 3);
 
@@ -37,7 +37,7 @@ public class SecondaryPhoneCommandParser implements Parser<SecondaryPhoneCommand
                 SecPhone phone = new SecPhone(phoneInput.substring(3));
                 return new SecondaryPhoneCommand(index, "update", phone);
 
-            }else{
+            } else {
                 return new SecondaryPhoneCommand(index, "remove", new SecPhone());
             }
         } catch (IllegalValueException ive) {

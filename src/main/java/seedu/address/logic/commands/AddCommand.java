@@ -43,7 +43,7 @@ public class AddCommand extends UndoableCommand {
     /**
      * Creates an AddCommand to add the specified {@code ReadOnlyPerson}
      */
-    public AddCommand(ReadOnlyPerson person) throws IllegalValueException{
+    public AddCommand(ReadOnlyPerson person) throws IllegalValueException {
         toAdd = new Person(person);
     }
 
