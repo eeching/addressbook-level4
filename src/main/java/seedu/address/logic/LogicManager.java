@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -37,12 +38,21 @@ public class LogicManager extends ComponentManager implements Logic {
         try {
             Command command = addressBookParser.parseCommand(commandText);
             command.setData(model, history, undoRedoStack);
-            CommandResult result = command.execute();
+
+            CommandResult result;
+
+            try{
+                result = command.execute();
+            }catch(IllegalValueException e){
+                throw new AssertionError("wrong input value");
+            }
+
             undoRedoStack.push(command);
             return result;
         } finally {
             history.add(commandText);
         }
+
     }
 
     @Override

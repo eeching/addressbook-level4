@@ -22,6 +22,8 @@ public interface ReadOnlyPerson {
     Address getAddress();
     ObjectProperty<Gender> genderProperty();
     Gender getGender();
+    ObjectProperty<SecPhone> secPhoneProperty();
+    SecPhone getSecPhone();
     ObjectProperty<UniqueTagList> tagProperty();
     Set<Tag> getTags();
 
@@ -36,7 +38,8 @@ public interface ReadOnlyPerson {
                 && other.getEmail().equals(this.getEmail())
                 && other.getAddress().equals(this.getAddress())
                 && (((other.getGender() == null) && (this.getGender() == null))
-                || other.getGender().equals(this.getGender())));
+                || other.getGender().equals(this.getGender()))
+                && other.getSecPhone().equals(this.getSecPhone()));
     }
 
     /**
@@ -50,13 +53,12 @@ public interface ReadOnlyPerson {
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
-                .append(getAddress());
-        if (getGender() != null) {
-            builder.append(" Gender: ");
-            builder.append(getGender());
-        }
-
-        builder.append(" Tags: ");
+                .append(getAddress())
+                .append(" Gender: ")
+                .append(getGender())
+                .append(" SecondaryPhone: ")
+                .append(getSecPhone())
+                .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

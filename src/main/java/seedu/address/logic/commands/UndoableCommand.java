@@ -4,7 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+
 import seedu.address.logic.commands.exceptions.CommandException;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 
@@ -14,12 +17,12 @@ import seedu.address.model.ReadOnlyAddressBook;
 public abstract class UndoableCommand extends Command {
     private ReadOnlyAddressBook previousAddressBook;
 
-    protected abstract CommandResult executeUndoableCommand() throws CommandException;
+    protected abstract CommandResult executeUndoableCommand() throws CommandException, IllegalValueException;
 
     /**
      * Stores the current state of {@code model#addressBook}.
      */
-    private void saveAddressBookSnapshot() {
+    private void saveAddressBookSnapshot() throws IllegalValueException{
         requireNonNull(model);
         this.previousAddressBook = new AddressBook(model.getAddressBook());
     }
@@ -29,7 +32,7 @@ public abstract class UndoableCommand extends Command {
      * was executed and updates the filtered person list to
      * show all persons.
      */
-    protected final void undo() {
+    protected final void undo() throws IllegalValueException{
         requireAllNonNull(model, previousAddressBook);
         model.resetData(previousAddressBook);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -39,7 +42,7 @@ public abstract class UndoableCommand extends Command {
      * Executes the command and updates the filtered person
      * list to show all persons.
      */
-    protected final void redo() {
+    protected final void redo() throws IllegalValueException{
         requireNonNull(model);
         try {
             executeUndoableCommand();
@@ -51,7 +54,7 @@ public abstract class UndoableCommand extends Command {
     }
 
     @Override
-    public final CommandResult execute() throws CommandException {
+    public final CommandResult execute() throws CommandException, IllegalValueException {
         saveAddressBookSnapshot();
         return executeUndoableCommand();
     }

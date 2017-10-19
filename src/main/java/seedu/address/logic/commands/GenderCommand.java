@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -16,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.SecPhone;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -49,20 +51,21 @@ public class GenderCommand extends UndoableCommand {
     /**
      * Adds or Updates a Person's birthday
      */
-    private Person updatePersonGender(ReadOnlyPerson personToUpdateGender, Gender gender) {
+    private Person updatePersonGender(ReadOnlyPerson personToUpdateGender, Gender gender) throws IllegalValueException {
         Name name = personToUpdateGender.getName();
         Phone phone = personToUpdateGender.getPhone();
         Email email = personToUpdateGender.getEmail();
         Address address = personToUpdateGender.getAddress();
+        SecPhone secPhone = personToUpdateGender.getSecPhone();
         Set<Tag> tags = personToUpdateGender.getTags();
 
-        Person personUpdated = new Person(name, phone, email, address, gender, tags);
+        Person personUpdated = new Person(name, phone, email, address, gender, secPhone, tags);
 
         return personUpdated;
     }
 
     @Override
-    public CommandResult executeUndoableCommand() throws CommandException {
+    public CommandResult executeUndoableCommand() throws CommandException, IllegalValueException {
         List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
